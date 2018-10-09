@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{86c0e08f-53e6-47d9-a93d-41585a8d4504}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>run.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId />
+    <Name>StyleMe</Name>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="data\amazon_data_html\1.html" />
+    <Content Include="data\amazon_data_html\10.html" />
+    <Content Include="data\amazon_data_html\11.html" />
+    <Content Include="data\amazon_data_html\12.html" />
+    <Content Include="data\amazon_data_html\13.html" />
+    <Content Include="data\amazon_data_html\14.html" />
+    <Content Include="data\amazon_data_html\15.html" />
+    <Content Include="data\amazon_data_html\16.html" />
+    <Content Include="data\amazon_data_html\17.html" />
+    <Content Include="data\amazon_data_html\18.html" />
+    <Content Include="data\amazon_data_html\19.html" />
+    <Content Include="data\amazon_data_html\2.html" />
+    <Content Include="data\amazon_data_html\20.html" />
+    <Content Include="data\amazon_data_html\21.html" />
+    <Content Include="data\amazon_data_html\22.html" />
+    <Content Include="data\amazon_data_html\23.html" />
+    <Content Include="data\amazon_data_html\24.html" />
+    <Content Include="data\amazon_data_html\25.html" />
+    <Content Include="data\amazon_data_html\26.html" />
+    <Content Include="data\amazon_data_html\27.html" />
+    <Content Include="data\amazon_data_html\28.html" />
+    <Content Include="data\amazon_data_html\29.html" />
+    <Content Include="data\amazon_data_html\3.html" />
+    <Content Include="data\amazon_data_html\30.html" />
+    <Content Include="data\amazon_data_html\31.html" />
+    <Content Include="data\amazon_data_html\32.html" />
+    <Content Include="data\amazon_data_html\33.html" />
+    <Content Include="data\amazon_data_html\34.html" />
+    <Content Include="data\amazon_data_html\35.html" />
+    <Content Include="data\amazon_data_html\36.html" />
+    <Content Include="data\amazon_data_html\37.html" />
+    <Content Include="data\amazon_data_html\38.html" />
+    <Content Include="data\amazon_data_html\39.html" />
+    <Content Include="data\amazon_data_html\4.html" />
+    <Content Include="data\amazon_data_html\40.html" />
+    <Content Include="data\amazon_data_html\41.html" />
+    <Content Include="data\amazon_data_html\42.html" />
+    <Content Include="data\amazon_data_html\43.html" />
+    <Content Include="data\amazon_data_html\5.html" />
+    <Content Include="data\amazon_data_html\6.html" />
+    <Content Include="data\amazon_data_html\7.html" />
+    <Content Include="data\amazon_data_html\8.html" />
+    <Content Include="data\amazon_data_html\9.html" />
+    <Content Include="doc\source\images\add_data_to_discovery.png" />
+    <Content Include="doc\source\images\architecture.png" />
+    <Content Include="doc\source\images\convo_add.png" />
+    <Content Include="doc\source\images\convo_init.png" />
+    <Content Include="doc\source\images\convo_list.png" />
+    <Content Include="doc\source\images\convo_remove.png" />
+    <Content Include="doc\source\images\create_cloudant_service.png" />
+    <Content Include="doc\source\images\create_conversation_service.png" />
+    <Content Include="doc\source\images\create_discovery.png" />
+    <Content Include="doc\source\images\create_discovery_service.png" />
+    <Content Include="doc\source\images\create_service.png" />
+    <Content Include="doc\source\images\credentials2.png" />
+    <Content Include="doc\source\images\dialog.png" />
+    <Content Include="doc\source\images\env_vars.png" />
+    <Content Include="doc\source\images\find_conversation_workspace.png" />
+    <Content Include="doc\source\images\import_conversation_workspace.png" />
+    <Content Include="doc\source\images\invite_bot.png" />
+    <Content Include="doc\source\images\launch_conversation.png" />
+    <Content Include="doc\source\images\launch_discovery.png" />
+    <Content Include="doc\source\images\manage_slack_settings.png" />
+    <Content Include="doc\source\images\nameSlackbot.png" />
+    <Content Include="doc\source\images\name_bot.png" />
+    <Content Include="doc\source\images\name_discovery.png" />
+    <Content Include="doc\source\images\open_conversation_menu.png" />
+    <Content Include="doc\source\images\process_discovery.png" />
+    <Content Include="doc\source\images\select_files_for_discovery.png" />
+    <Content Include="doc\source\images\view_bot_token.png" />
+    <Content Include="doc\source\images\view_conversation_workspace_id.png" />
+    <Content Include="doc\source\images\view_discovery_ids.png" />
+    <Content Include=".env" />
+    <Content Include="python-flask-server\static\css\bot.css" />
+    <Content Include="python-flask-server\static\css\img\watson.png" />
+    <Content Include="python-flask-server\static\index.html" />
+    <Content Include="python-flask-server\static\src\bot.js" />
+    <Content Include="requirements.txt" />
+    <Content Include="test-requirements.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="python-flask-server\server.py" />
+    <Compile Include="python-flask-server\tests\__init__.py" />
+    <Compile Include="python-flask-server\__init__.py" />
+    <Compile Include="run.py" />
+    <Compile Include="setup.py" />
+    <Compile Include="tools\get_google_data.py" />
+    <Compile Include="tools\print_bot_id.py" />
+    <Compile Include="watsonstyleme\database\cloudant_style_me.py" />
+    <Compile Include="watsonstyleme\database\__init__.py" />
+    <Compile Include="watsonstyleme\tests\fake_discovery.py" />
+    <Compile Include="watsonstyleme\tests\unit\message.py" />
+    <Compile Include="watsonstyleme\tests\unit\test_cloudant_style_me.py" />
+    <Compile Include="watsonstyleme\tests\unit\test_watson_style_me.py" />
+    <Compile Include="watsonstyleme\tests\unit\__init__.py" />
+    <Compile Include="watsonstyleme\tests\__init__.py" />
+    <Compile Include="watsonstyleme\watson_style_me.py" />
+    <Compile Include="watsonstyleme\__init__.py" />
+    <Compile Include="__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="data\" />
+    <Folder Include="data\amazon_data_html" />
+    <Folder Include="doc\" />
+    <Folder Include="doc\source\" />
+    <Folder Include="doc\source\images" />
+    <Folder Include="python-flask-server" />
+    <Folder Include="python-flask-server\static" />
+    <Folder Include="python-flask-server\static\css" />
+    <Folder Include="python-flask-server\static\css\img" />
+    <Folder Include="python-flask-server\static\src" />
+    <Folder Include="python-flask-server\tests" />
+    <Folder Include="tools" />
+    <Folder Include="watsonstyleme\" />
+    <Folder Include="watsonstyleme\database\" />
+    <Folder Include="watsonstyleme\tests\" />
+    <Folder Include="watsonstyleme\tests\unit\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+</Project>

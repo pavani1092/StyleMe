@@ -1,0 +1,26 @@
+declared-services:
+  wos-conversation-service:
+    label: conversation
+    plan: free
+  wos-cloudantNoSQLDB-service:
+    label: cloudantNoSQLDB
+    plan: Lite
+  wos-discovery-service:
+    label: discovery
+    plan: lite
+applications:
+- services:
+   - wos-conversation-service
+   - wos-cloudantNoSQLDB-service
+   - wos-discovery-service
+  path: .
+  command: python python-flask-server/server.py
+  memory: 128M
+  instances: 1
+  domain: mybluemix.net
+  name: watson-online-store
+  disk_quota: 1024M
+env:
+  CLOUDANT_DB_NAME: watson-online-store
+  SLACK_BOT_USER: wos
+  SLACK_BOT_TOKEN: placeholder
