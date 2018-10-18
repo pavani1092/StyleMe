@@ -9,5 +9,5 @@ install:
 before_script:
  - flake8 .
 script:
- - py.test --cov=watsononlinestore
+ - py.test --cov=watsonstyleme
 
