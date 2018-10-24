@@ -17,7 +17,7 @@ import random
 import re
 import time
 
-from watsonstyleme.tests.fake_discovery import FAKE_DISCOVERY
+from StyleMe.watsonstyleme.tests.fake_discovery import FAKE_DISCOVERY
 
 logging.basicConfig(level=logging.DEBUG)
 LOG = logging.getLogger(__name__)
