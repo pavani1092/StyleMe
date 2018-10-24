@@ -669,13 +669,22 @@ class WatsonStyleMe:
         :returns: Discovery response in format for Watson Assistant
         :rtype: dict
         """
-
-        discovery_response = self.discovery_client.query(
-            environment_id=self.discovery_environment_id,
-            collection_id=self.discovery_collection_id,
-            query=input_text,
-            count=DISCOVERY_QUERY_COUNT
-        ).get_result()
+        if self.context['root_intent'] == 'wardrobe':
+            discovery_response = self.discovery_client.query(
+                environment_id=self.discovery_environment_id,
+                collection_id=self.discovery_collection_id,
+                query=input_text,
+                filter="Wardrobe::Yes",
+                count=DISCOVERY_QUERY_COUNT
+            ).get_result()
+        else:
+            discovery_response = self.discovery_client.query(
+                environment_id=self.discovery_environment_id,
+                collection_id=self.discovery_collection_id,
+                query=input_text,
+                filter="Wardrobe::No",
+                count=DISCOVERY_QUERY_COUNT
+            ).get_result()
 
         # Watson discovery assigns a confidence level to each result.
         # Based on data mix, we can assign a minimum tolerance value in an
