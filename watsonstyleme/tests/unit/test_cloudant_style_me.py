@@ -3,8 +3,8 @@ import unittest
 import ddt
 import mock
 
-from watsonstyleme.database import cloudant_style_me
-from watsonstyleme.watson_style_me import OnlineStoreCustomer
+from StyleMe.watsonstyleme.database import cloudant_style_me
+from StyleMe.watsonstyleme.watson_style_me import OnlineStoreCustomer
 
 CUSTOMER_DOC = {
             'type': 'customer',
