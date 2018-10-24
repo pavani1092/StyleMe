@@ -7,7 +7,7 @@ install:
   - "pip install -r test-requirements.txt"
   - "pip install flake8"
 before_script:
- - flake8 --ignore=E501 
+ - flake8 --ignore=E501,E126,E123,E226,E121,E24,E704,W503,W504
 script:
  - py.test --cov=watsonstyleme
 
