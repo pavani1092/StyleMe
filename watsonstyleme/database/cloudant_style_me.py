@@ -73,7 +73,7 @@ class CloudantStyleMe(object):
         """
         return self.find_doc('customer', 'email', customer_str)
 
-    '''def list_shopping_cart(self, customer_str):
+    def list_shopping_cart(self, customer_str):
         """Get shopping cart info for a given customer.
 
         :param str customer_str: customer (email addr)
@@ -84,9 +84,9 @@ class CloudantStyleMe(object):
         doc = self.find_customer(customer_str)
         if doc:
             return doc['shopping_cart']
-        return doc  # None'''
+        return doc  # None
 
-    '''def add_to_shopping_cart(self, customer_str, item):
+    def add_to_shopping_cart(self, customer_str, item):
         """Adds item to shopping cart for customer.
 
         :param str customer_str: customer (email addr)
@@ -104,9 +104,9 @@ class CloudantStyleMe(object):
             LOG.exception("Cloudant DB exception:")
 
         finally:
-            self.client.disconnect()'''
+            self.client.disconnect()
 
-    '''def delete_item_shopping_cart(self, customer_str, item):
+    def delete_item_shopping_cart(self, customer_str, item):
         """Deletes item from shopping cart for customer.
         :param str customer_str: The customer specified by the user
         :param str item: item to delete
@@ -124,7 +124,7 @@ class CloudantStyleMe(object):
             LOG.exception("Cloudant DB exception:")
 
         finally:
-            self.client.disconnect()'''
+            self.client.disconnect()
 
     # Cloudant Helper Methods
 
