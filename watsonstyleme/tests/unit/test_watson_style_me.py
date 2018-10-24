@@ -2,9 +2,9 @@ import unittest
 
 import ddt
 import mock
-from watsonstyleme.tests.unit import message as message_json
+from StyleMe.watsonstyleme.tests.unit import message as message_json
 
-from watsonstyleme import watson_style_me
+from StyleMe.watsonstyleme import watson_style_me
 
 
 @ddt.ddt

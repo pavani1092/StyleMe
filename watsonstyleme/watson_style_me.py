@@ -17,7 +17,7 @@ import random
 import re
 import time
 
-from watsonstyleme.tests.fake_discovery import FAKE_DISCOVERY
+from StyleMe.watsonstyleme.tests.fake_discovery import FAKE_DISCOVERY
 
 logging.basicConfig(level=logging.DEBUG)
 LOG = logging.getLogger(__name__)
@@ -740,8 +740,7 @@ class WatsonStyleMe:
 
         for index, item in enumerate(shopping_list):
             if index+1 == item_num:
-                self.cloudant_style_me.delete_item_shopping_cart(email,
-                                                                     item)
+                self.cloudant_style_me.delete_item_shopping_cart(email, item)
         self.clear_shopping_cart()
 
         # no need for user input, return to Watson Dialogue
