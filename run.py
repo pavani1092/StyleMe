@@ -178,7 +178,7 @@ class WatsonEnv:
                     return None
 
         # Start Watson Style Me app.
-        watsonstyleme = WatsonStyleMe(bot_id, slack_client, assistant_client, discovery_client,wardrobe_discovery_client, cloudant_style_me)
+        watsonstyleme = WatsonStyleMe(bot_id, slack_client, assistant_client, discovery_client, wardrobe_discovery_client, cloudant_style_me)
         return watsonstyleme
 
 
