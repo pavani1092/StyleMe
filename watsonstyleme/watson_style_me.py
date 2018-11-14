@@ -93,7 +93,7 @@ class OnlineStoreCustomer:
 
 class WatsonStyleMe:
     def __init__(self, bot_id, slack_client,
-                 assistant_client, discovery_client,wardrobe_discovery_client,
+                 assistant_client, discovery_client, wardrobe_discovery_client,
                  cloudant_style_me):
 
         # specific for Slack as UI
