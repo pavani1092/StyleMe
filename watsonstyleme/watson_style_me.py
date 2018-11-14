@@ -17,7 +17,7 @@ import random
 import re
 import time
 
-from StyleMe.watsonstyleme.tests.fake_discovery import FAKE_DISCOVERY
+from watsonstyleme.tests.fake_discovery import FAKE_DISCOVERY
 
 logging.basicConfig(level=logging.DEBUG)
 LOG = logging.getLogger(__name__)
@@ -93,7 +93,7 @@ class OnlineStoreCustomer:
 
 class WatsonStyleMe:
     def __init__(self, bot_id, slack_client,
-                 assistant_client, discovery_client,
+                 assistant_client, discovery_client,wardrobe_discovery_client,
                  cloudant_style_me):
 
         # specific for Slack as UI
@@ -111,6 +111,7 @@ class WatsonStyleMe:
 
         # IBM Watson Discovery Service
         self.discovery_client = discovery_client
+        self.wardrobe_discovery_client = wardrobe_discovery_client
         self.discovery_data_source = os.environ.get(
             'DISCOVERY_DATA_SOURCE', DISCOVERY_IBM_STORE)
         try:
@@ -129,6 +130,8 @@ class WatsonStyleMe:
             self.setup_discovery_collection(discovery_client,
                                             self.discovery_data_source,
                                             os.environ))
+        self.wardrobe_discovery_environment_id = os.environ.get('WARDROBE_DISCOVERY_ENVIRONMENT_ID')
+        self.wardrobe_discovery_collection_id = os.environ.get('WARDROBE_DISCOVERY_COLLECTION_ID')
 
         self.context = {}
         self.customer = None

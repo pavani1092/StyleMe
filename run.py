@@ -23,7 +23,7 @@ from watson_developer_cloud import DiscoveryV1
 
 from watsonstyleme.database.cloudant_style_me import \
     CloudantStyleMe
-from StyleMe.watsonstyleme.watson_style_me import WatsonStyleMe
+from watsonstyleme.watson_style_me import WatsonStyleMe
 
 
 class WatsonEnv:
@@ -99,6 +99,8 @@ class WatsonEnv:
         discovery_url = os.environ.get('DISCOVERY_URL')
         discovery_iam_apikey = os.environ.get("DISCOVERY_IAM_APIKEY")
 
+        wardrobe_discovery_iam_apikey = os.environ.get("WARDROBE_DISCOVERY_IAM_APIKEY")
+
         # If the CLOUDANT_USERNAME env var was not set then use
         # VCAP_SERVICES like a WatsonService would.
         if not cloudant_username:
@@ -152,6 +154,14 @@ class WatsonEnv:
 
         discovery_client = DiscoveryV1(**discovery_kwargs)
 
+        wardrobe_discovery_kwargs = {
+            'version': '2018-08-01',
+            'iam_apikey': wardrobe_discovery_iam_apikey,
+            'url': discovery_url
+        }
+
+        wardrobe_discovery_client = DiscoveryV1(**wardrobe_discovery_kwargs)
+
         # Instantiate Slack chatbot.
         if not slack_bot_token or 'placeholder' in slack_bot_token:
             print("SLACK_BOT_TOKEN needs to be set correctly. "
@@ -168,7 +178,7 @@ class WatsonEnv:
                     return None
 
         # Start Watson Style Me app.
-        watsonstyleme = WatsonStyleMe(bot_id, slack_client, assistant_client, discovery_client, cloudant_style_me)
+        watsonstyleme = WatsonStyleMe(bot_id, slack_client, assistant_client, discovery_client,wardrobe_discovery_client, cloudant_style_me)
         return watsonstyleme
 
 
