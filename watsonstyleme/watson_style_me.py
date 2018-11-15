@@ -12,7 +12,7 @@
 
 import json
 
-from BeautifulSoup import BeautifulSoup as BSHTML
+from bs4 import BeautifulSoup as BSHTML
 import urllib2
 import requests
 from watson_developer_cloud import VisualRecognitionV3, \

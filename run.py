@@ -21,7 +21,7 @@ from slackclient import SlackClient
 from watson_developer_cloud import AssistantV1
 from watson_developer_cloud import DiscoveryV1
 
-from watsonstyleme.database.cloudant_style_me import \
+from StyleMe.watsonstyleme.database.cloudant_style_me import \
     CloudantStyleMe
 from StyleMe.watsonstyleme.watson_style_me import WatsonStyleMe
 
