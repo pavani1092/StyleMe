@@ -801,8 +801,7 @@ class WatsonStyleMe:
         LOG.debug("watson_response:\n{}\n".format(watson_response))
         if 'context' in watson_response:
             self.context = watson_response['context']
-        sender.send_message("\n".join(watson_response['output']['text']) +
-                            "\n")
+        sender.send_message("\n".join(watson_response['output']['text']))
 
         if (self.context.get('discovery_string') and self.discovery_client):
             return self.handle_discovery_query()
@@ -862,12 +861,8 @@ class WatsonStyleMe:
                             if float(obj['score']) > 0.0:
                                 res_dict[obj['class']] = float(obj['score'])
 
-            if len(res_dict) > 0:
-                res_dict = sorted(res_dict, key=res_dict.get, reverse=True)
-                data['title'] = file_description
-
-            sz = len(res_dict)
-            result = ' '.join(res_dict[:sz])
+            data['title'] = file_description
+            result = ' '.join(res_dict)
             result = file_description + ' ' + result
             data['text'] = result
 
