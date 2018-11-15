@@ -11,6 +11,13 @@
 # under the License.
 
 import json
+
+from BeautifulSoup import BeautifulSoup as BSHTML
+import urllib2
+import requests
+from watson_developer_cloud import VisualRecognitionV3, \
+    WatsonApiException
+import json
 import logging
 import os
 import random
@@ -384,6 +391,11 @@ class WatsonStyleMe:
                         return (output['text'].strip().lower(),
                                 output['channel'],
                                 output['user'])
+                elif output and 'files' in output:
+                    return (output['text'].strip().lower().encode('ascii', 'ignore'),
+                            output['files'][0]['permalink_public'].encode('ascii', 'ignore'),
+                            output['user'].encode('ascii', 'ignore'))
+
         return None, None, None
 
     def add_customer_to_context(self):
@@ -673,9 +685,9 @@ class WatsonStyleMe:
         :rtype: dict
         """
         if self.context['root_intent'] == 'wardrobe':
-            discovery_response = self.discovery_client.query(
-                environment_id=self.discovery_environment_id,
-                collection_id=self.discovery_collection_id,
+            discovery_response = self.wardrobe_discovery_client.query(
+                environment_id=self.wardrobe_discovery_environment_id,
+                collection_id=self.wardrobe_discovery_collection_id,
                 query=input_text,
                 filter="Wardrobe::Yes",
                 count=DISCOVERY_QUERY_COUNT
@@ -826,6 +838,59 @@ class WatsonStyleMe:
         while not get_input:
             get_input = self.handle_message(message, sender)
 
+    def recognize_image(self, url1, file_description):
+        visual_recognition = VisualRecognitionV3(
+            '2018-11-11',
+            iam_apikey='tbWfPukC9BkvAEDCbAewEGFwW6IjR7SJuZj1FzHOj_GG')
+        data = {}
+        data['image_url'] = url1
+        data['wardrobe'] = 'yes'
+        if True:
+            classes = visual_recognition.classify(
+                url=url1,
+                threshold='0.0',
+                classifier_ids=["default"]).get_result()
+            # resp_dict = json.loads(classes);
+            res_dict = {}
+            if len(classes['images']) > 0:
+                if len(classes['images'][0]['classifiers']) > 0:
+                    if len(classes['images'][0]['classifiers'][0]) > 0:
+                        preds = classes['images'][0]['classifiers'][0]['classes'];
+                        for obj in preds:
+                            if float(obj['score']) > 0.0:
+                                res_dict[obj['class']] = float(obj['score'])
+
+            if len(res_dict) > 0:
+                res_dict = sorted(res_dict, key=res_dict.get, reverse=True)
+                data['title'] = res_dict[0]
+
+            sz = len(res_dict)
+            result = ' '.join(res_dict[:sz])
+            result = file_description + ' ' + result
+            data['text'] = result
+
+        return data
+
+    def update_wardrobe(self, file_id, permalink_public, file_description):
+        res = requests.post("https://slack.com/api/files.sharedPublicURL", {"token": "xoxp-434681964305-435150868323-434712747713-658d8cfd40111c176c865f4292d0b2c5", "file": file_id})
+        if res.__getattribute__('ok'):
+            page = urllib2.urlopen(permalink_public)
+            soup = BSHTML(page)
+            images = soup.findAll('img')
+            discovery_json = self.recognize_image(images[0]['src'], file_description)
+            environ = os.environ
+            path = os.getcwd() + "\\data\\wardrobe\\"
+            with open(os.path.join(path, file_id+'.json'), 'w') as json_file:
+                json.dump(discovery_json,json_file)
+            with open(os.path.join(path, file_id+'.json'), 'r') as f:
+                data = f.read()
+            self.wardrobe_discovery_client.add_document(environ.get('WARDROBE_DISCOVERY_ENVIRONMENT_ID'),
+                                                        environ.get('WARDROBE_DISCOVERY_COLLECTION_ID'),
+                                                        file=data,
+                                                        filename=file_id+'.json')
+        else:
+            raise Exception("Unable to upload picture. Please try again")
+
     def run(self):
         """Main run loop of the application with a Slack client
         """
@@ -841,10 +906,10 @@ class WatsonStyleMe:
                     LOG.debug("slack output\n:{}\n".format(slack_output))
 
                 message, channel, user = self.parse_slack_output(slack_output)
-                if message:
-                    LOG.debug("message:\n %s\n channel:\n %s\n" %
-                              (message, channel))
-                if message and channel and 'unfurl' not in message:
+
+                if message and channel and 'files' in slack_output[0]:
+                    self.update_wardrobe(slack_output[0]['files'][0]['id'].encode('ascii', 'ignore'), channel, message)
+                elif message and channel and 'unfurl' not in message:
                     sender = SlackSender(self.slack_client, channel)
                     self.handle_conversation(message, sender, user)
 
