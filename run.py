@@ -23,8 +23,7 @@ from watson_developer_cloud import DiscoveryV1
 
 from watsonstyleme.database.cloudant_style_me import \
     CloudantStyleMe
-from watsonstyleme.watson_style_me import WatsonStyleMe
-
+from StyleMe.watsonstyleme.watson_style_me import WatsonStyleMe
 
 class WatsonEnv:
 
