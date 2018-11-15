@@ -872,7 +872,7 @@ class WatsonStyleMe:
         return data
 
     def update_wardrobe(self, file_id, permalink_public, file_description):
-        res = requests.post("https://slack.com/api/files.sharedPublicURL", {"token": "xoxp-434681964305-435150868323-434712747713-658d8cfd40111c176c865f4292d0b2c5", "file": file_id})
+        res = requests.post("https://slack.com/api/files.sharedPublicURL", {"token": "xoxp-434681964305-435150868323-479950531236-4283e3391cc6463655a5e91d375d1db3", "file": file_id})
         if res.__getattribute__('ok'):
             page = urllib2.urlopen(permalink_public)
             soup = BSHTML(page)
