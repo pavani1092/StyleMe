@@ -392,7 +392,11 @@ class WatsonStyleMe:
                                 output['channel'],
                                 output['user'])
                 elif output and 'files' in output:
-                    return (output['text'].strip().lower().encode('ascii', 'ignore'),
+                    if output['text'].encode('ascii', 'ignore') is '':
+                        text = ' '
+                    else:
+                        text = output['text'].strip().lower().encode('ascii', 'ignore')
+                    return (text,
                             output['files'][0]['permalink_public'].encode('ascii', 'ignore'),
                             output['user'].encode('ascii', 'ignore'))
 
@@ -689,7 +693,6 @@ class WatsonStyleMe:
                 environment_id=self.wardrobe_discovery_environment_id,
                 collection_id=self.wardrobe_discovery_collection_id,
                 query=input_text,
-                filter="Wardrobe::Yes",
                 count=DISCOVERY_QUERY_COUNT
             ).get_result()
         else:
@@ -697,7 +700,6 @@ class WatsonStyleMe:
                 environment_id=self.discovery_environment_id,
                 collection_id=self.discovery_collection_id,
                 query=input_text,
-                filter="Wardrobe::No",
                 count=DISCOVERY_QUERY_COUNT
             ).get_result()
 
@@ -862,7 +864,7 @@ class WatsonStyleMe:
 
             if len(res_dict) > 0:
                 res_dict = sorted(res_dict, key=res_dict.get, reverse=True)
-                data['title'] = res_dict[0]
+                data['title'] = file_description
 
             sz = len(res_dict)
             result = ' '.join(res_dict[:sz])
@@ -908,6 +910,8 @@ class WatsonStyleMe:
                 message, channel, user = self.parse_slack_output(slack_output)
 
                 if message and channel and 'files' in slack_output[0]:
+                    sender = SlackSender(self.slack_client, slack_output[0]['channel'])
+                    sender.send_message("Wardrobe updated successfully!")
                     self.update_wardrobe(slack_output[0]['files'][0]['id'].encode('ascii', 'ignore'), channel, message)
                 elif message and channel and 'unfurl' not in message:
                     sender = SlackSender(self.slack_client, channel)
